@@ -28,12 +28,14 @@ public class ViCaNhanRepository {
 
     private static List<ViCaNhan> viCaNhans = new ArrayList<>();
 
-    public List<ViCaNhan> getAll(){
+    public List<ViCaNhan> getAll(Long userId){
         List<ViCaNhan> list = new ArrayList<>();
         try {
             Connection connection = DbConnector.getConnection();
-            Statement statement = connection.createStatement();
-            ResultSet rs = statement.executeQuery("select * from ViCaNhan");
+            String sql = "select * from ViCaNhan where createdById = ?";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setLong(1, userId);
+            ResultSet rs = ps.executeQuery();
             while (rs.next()){
                 Long id = rs.getLong("id");
                 LocalDate ngayThang = rs.getDate("ngayThang").toLocalDate();
@@ -69,12 +71,13 @@ public class ViCaNhanRepository {
         }
     }
 
-    public ViCaNhan Detail(int id_Tim){
-        sql = "select id, ngayThang, loai, danhMuc, moTa, soTien, createdById from ViCaNhan\n" + "where id = ?";
+    public ViCaNhan Detail(int id_Tim, Long userId){
+        sql = "select id, ngayThang, loai, danhMuc, moTa, soTien, createdById from ViCaNhan\n" + "where id = ? and where createdById = ?";
         ViCaNhan vcn = new ViCaNhan();
         try {
             ps = con.prepareStatement(sql);
             ps.setObject(1, id_Tim);
+            ps.setLong(2, userId);
             rs = ps.executeQuery();
             if(rs.next()){
                 Long id;
@@ -104,11 +107,12 @@ public class ViCaNhanRepository {
         }
     }
 
-    public int xoa(int id){
-        sql = "delete from ViCaNhan \n" + "where id = ?";
+    public int xoa(int id, Long userId){
+        sql = "delete from ViCaNhan \n" + "where id = ? and createdById = ?";
         try {
             ps = con.prepareStatement(sql);
             ps.setObject(1, id);
+            ps.setLong(2, userId);
             return ps.executeUpdate();
         }catch (Exception e){
             e.printStackTrace();

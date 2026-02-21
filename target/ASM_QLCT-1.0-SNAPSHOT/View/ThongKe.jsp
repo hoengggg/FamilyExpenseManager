@@ -198,7 +198,7 @@
 </div>
 
 <div class="sign-out">
-    <a href="${pageContext.request.contextPath}/dang_nhap">Đăng xuất</a>
+    <a href="${pageContext.request.contextPath}/dang_xuat">Đăng xuất</a>
 </div>
 
 <jsp:include page="/View/views/fragments/footer.jsp"/>

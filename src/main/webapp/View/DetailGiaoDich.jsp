@@ -77,13 +77,19 @@
 
         <label>Danh mục</label>
         <select name="danhMuc" class="form-select">
-            <option value="Tiền lương" ${giaoDichXem.danhMuc == 'Tiền lương' ? 'selected' : ''}>Tiền lương</option>
-            <option value="Ăn uống" ${giaoDichXem.danhMuc == 'Ăn uống' ? 'selected' : ''}>Ăn uống</option>
-            <option value="Giải trí" ${giaoDichXem.danhMuc == 'Giải trí' ? 'selected' : ''}>Giải trí</option>
-            <option value="Di chuyển" ${giaoDichXem.danhMuc == 'Di chuyển' ? 'selected' : ''}>Di chuyển</option>
-            <option value="Tiền mô hình" ${giaoDichXem.danhMuc == 'Tiền mô hình' ? 'selected' : ''}>Tiền mô hình</option>
-            <option value="Tiền thưởng" ${giaoDichXem.danhMuc == 'Tiền thưởng' ? 'selected' : ''}>Tiền thưởng</option>
-            <option value="Khác" ${giaoDichXem.danhMuc == 'Khác' ? 'selected' : ''}>Khác</option>
+            <option value="Lương" ${giaoDichXem.danhMuc == "Lương" ? "selected" : ""}>Lương</option>
+            <option value="Thu nhập thêm" ${giaoDichXem.danhMuc == "Thu nhập thêm" ? "selected" : ""}>Thu nhập thêm</option>
+            <option value="Thực phẩm" ${giaoDichXem.danhMuc == "Thực phẩm" ? "selected" : ""}>Thực phẩm</option>
+            <option value="Y tế" ${giaoDichXem.danhMuc == "Y tế" ? "selected" : ""}>Y tế</option>
+            <option value="Học tập" ${giaoDichXem.danhMuc == "Học tập" ? "selected" : ""}>Học tập</option>
+            <option value="Điện nước" ${giaoDichXem.danhMuc == "Điện nước" ? "selected" : ""}>Điện nước</option>
+            <option value="Đi lại" ${giaoDichXem.danhMuc == "Đi lại" ? "selected" : ""}>Đi lại</option>
+            <option value="Tiền nhà" ${giaoDichXem.danhMuc == "Tiền nhà" ? "selected" : ""}>Tiền nhà</option>
+            <option value="Tiết kiệm gia đình" ${giaoDichXem.danhMuc == "Tiết kiệm gia đình" ? "selected" : ""}>Tiết kiệm gia đình</option>
+            <option value="Giải trí" ${giaoDichXem.danhMuc == "Giải trí" ? "selected" : ""}>Giải trí</option>
+            <option value="Mua sắm" ${giaoDichXem.danhMuc == "Mua sắm" ? "selected" : ""}>Mua sắm</option>
+            <option value="Du lịch" ${giaoDichXem.danhMuc == "Du lịch" ? "selected" : ""}>Du lịch</option>
+            <option value="Khác" ${giaoDichXem.danhMuc == "Khác" ? "selected" : ""}>Khác</option>
         </select>
 
         <label>Mô tả</label>

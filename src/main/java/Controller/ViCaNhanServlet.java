@@ -21,7 +21,10 @@ public class ViCaNhanServlet extends HttpServlet {
             resp.sendRedirect(req.getContextPath() + "/dang_nhap");
             return;
         }
-        req.setAttribute("listViCaNhan", repo.getAll());
+
+        Long UserId = currentUser.getId();
+
+        req.setAttribute("listViCaNhan", repo.getAll(UserId));
         req.getRequestDispatcher("/View/vi_ca_nhan.jsp").forward(req, resp);
     }
 }

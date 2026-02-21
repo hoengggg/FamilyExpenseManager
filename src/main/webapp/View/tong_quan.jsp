@@ -179,7 +179,7 @@
         <div class="menu-tongquan active">
             <div class="button-menu">
                 <a href="${pageContext.request.contextPath}/tong_quan">
-                    <span><span class="icon">📋</span>Tổng quan</span>
+                    <span><span class="icon">📋</span><fmt:message key="tongquan"/></span>
                 </a>
             </div>
         </div>
@@ -187,7 +187,7 @@
         <div class="menu-tongquan">
             <div class="button-menu">
                 <a href="${pageContext.request.contextPath}/giao_dich">
-                    <span><span class="icon">💳</span>Giao dịch</span>
+                    <span><span class="icon">💳</span><fmt:message key="giaodich"/></span>
                 </a>
             </div>
         </div>
@@ -195,7 +195,7 @@
         <div class="menu-tongquan">
             <div class="button-menu">
                 <a href="${pageContext.request.contextPath}/muc_tieu">
-                    <span><span class="icon">🎯</span>Mục tiêu</span>
+                    <span><span class="icon">🎯</span><fmt:message key="muctieu"/></span>
                 </a>
             </div>
         </div>
@@ -203,7 +203,7 @@
         <div class="menu-tongquan">
             <div class="button-menu">
                 <a href="${pageContext.request.contextPath}/vi_ca_nhan">
-                    <span><span class="icon">👛</span>Ví cá nhân</span>
+                    <span><span class="icon">👛</span><fmt:message key="vicanhan"/></span>
                 </a>
             </div>
         </div>
@@ -211,7 +211,7 @@
         <div class="menu-tongquan">
             <div class="button-menu">
                 <a href="${pageContext.request.contextPath}/ThongKe">
-                    <span><span class="icon">📊</span>Thống kê</span>
+                    <span><span class="icon">📊</span><fmt:message key="thongke"/></span>
                 </a>
             </div>
         </div>
@@ -236,7 +236,7 @@
     </div>
 
     <div class="sign-out">
-        <a href="${pageContext.request.contextPath}/dang_nhap">
+        <a href="${pageContext.request.contextPath}/dang_xuat">
             <p><fmt:message key="dangxuat"/></p>
         </a>
     </div>

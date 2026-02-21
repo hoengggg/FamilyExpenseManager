@@ -1,5 +1,6 @@
 package Controller;
 
+import Entity.DangNhap;
 import Repository.ViCaNhanRepository;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -16,7 +17,9 @@ public class ViCaNhanDeleteServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Integer id = Integer.parseInt(req.getParameter("id"));
-        repo.xoa(id);
+        DangNhap currentUser = (DangNhap) req.getSession().getAttribute("currentUser");
+        Long userId = currentUser.getId();
+        repo.xoa(id, userId);
         resp.sendRedirect(req.getContextPath() + "/vi_ca_nhan");
     }
 }

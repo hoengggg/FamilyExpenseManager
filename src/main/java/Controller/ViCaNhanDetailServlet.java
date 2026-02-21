@@ -18,11 +18,14 @@ public class ViCaNhanDetailServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Integer id = Integer.parseInt(req.getParameter("id"));
-        req.setAttribute("VCN_Tim", repo.Detail(id));
+        DangNhap currentUser = (DangNhap) req.getSession().getAttribute("currentUser");
+        Long userId = currentUser.getId();
+        req.setAttribute("VCN_Tim", repo.Detail(id, userId));
         req.getRequestDispatcher("/View/DetailViCaNhan.jsp").forward(req, resp);
     }
 
     @Override
+    //đây là chức năng sửa
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         LocalDate ngayThang = LocalDate.parse(req.getParameter("ngayThang"));
         String loai = req.getParameter("loai");

@@ -85,7 +85,8 @@
             <option value="Tiền nhà" ${VCN_Tim.danhMuc == "Tiền nhà" ? "selected" : ""}>Tiền nhà</option>
             <option value="Tiết kiệm gia đình" ${VCN_Tim.danhMuc == "Tiết kiệm gia đình" ? "selected" : ""}>Tiết kiệm gia đình</option>
             <option value="Giải trí" ${VCN_Tim.danhMuc == "Giải trí" ? "selected" : ""}>Giải trí</option>
-            <option value="Mua sắm" ${VCN_Tim.danhMuc == "Giải trí" ? "selected" : ""}>Mua sắm</option>
+            <option value="Mua sắm" ${VCN_Tim.danhMuc == "Mua sắm" ? "selected" : ""}>Mua sắm</option>
+            <option value="Du lịch" ${VCN_Tim.danhMuc == "Du lịch" ? "selected" : ""}>Du lịch</option>
             <option value="Khác" ${VCN_Tim.danhMuc == "Khác" ? "selected" : ""}>Khác</option>
         </select>
 

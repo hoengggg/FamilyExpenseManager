@@ -144,7 +144,7 @@
 <body>
 <jsp:include page="/View/views/fragments/header.jsp" />
 <div class="header">
-    <h1 class="qlct">Quản lý chi tiêu</h1>
+    <h1 class="qlct">Ví cá nhân</h1>
     <p>Quản lý các khoản thu chi của bạn</p>
 </div>
 
@@ -227,7 +227,7 @@
 </div>
 
 <div class="sign-out">
-    <a href="${pageContext.request.contextPath}/dang_nhap">Đăng xuất</a>
+    <a href="${pageContext.request.contextPath}/dang_xuat">Đăng xuất</a>
 </div>
 
 <jsp:include page="/View/views/fragments/footer.jsp"/>

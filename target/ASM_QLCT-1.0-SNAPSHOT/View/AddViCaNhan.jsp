@@ -74,12 +74,18 @@
 
         <label>Danh mục</label>
         <select name="danhMuc" class="form-select">
-            <option value="Tiền lương">Tiền lương</option>
-            <option value="Ăn uống">Ăn uống</option>
+            <option value="Lương">Lương</option>
+            <option value="Thu nhập thêm">Thu nhập thêm</option>
+            <option value="Thực phẩm">Thực phẩm</option>
+            <option value="Y tế">Y tế</option>
+            <option value="Học tập">Học tập</option>
+            <option value="Điện nước">Điện nước</option>
+            <option value="Đi lại">Đi lại</option>
+            <option value="Tiền nhà">Tiền nhà</option>
+            <option value="Tiết kiệm gia đình">Tiết kiệm gia đình</option>
             <option value="Giải trí">Giải trí</option>
-            <option value="Di chuyển">Di chuyển</option>
-            <option value="Tiền mô hình">Tiền mô hình</option>
-            <option value="Tiền thưởng">Tiền thưởng</option>
+            <option value="Mua sắm">Mua sắm</option>
+            <option value="Du lịch">Du lịch</option>
             <option value="Khác">Khác</option>
         </select>
 
