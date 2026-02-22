@@ -1,87 +1,45 @@
 package Entity;
+//value="${mucTieuXem.tienMucTieu * 1}"   riêng cái tiền kiểu như này vì để double nên phải làm cái value như này cho ô input bên jsp để khi ấn xem ko bị lỗi định dạng
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity
+@Table(name = "ViCaNhan")
 public class ViCaNhan {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(name = "ngayThang")
     private LocalDate ngayThang;
+
+    @Column(name = "loai")
     private String loai;
+
+    @Column(name = "danhMuc")
     private String danhMuc;
+
+    @Column(name = "moTa")
     private String moTa;
-    private double soTien;  //value="${mucTieuXem.tienMucTieu * 1}"   riêng cái tiền kiểu như này vì để double nên phải làm cái value như này cho ô input bên jsp để khi ấn xem ko bị lỗi định dạng
-    private Long createdById;
 
-    public ViCaNhan() {
-    }
+    @Column(name = "soTien")
+    private Double soTien;
 
-    public ViCaNhan(Long id, LocalDate ngayThang, String loai, String danhMuc, String moTa, double soTien, Long createdById) {
-        this.id = id;
-        this.ngayThang = ngayThang;
-        this.loai = loai;
-        this.danhMuc = danhMuc;
-        this.moTa = moTa;
-        this.soTien = soTien;
-        this.createdById = createdById;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public LocalDate getNgayThang() {
-        return ngayThang;
-    }
-
-    public void setNgayThang(LocalDate ngayThang) {
-        this.ngayThang = ngayThang;
-    }
+    @ManyToOne
+    @JoinColumn(name = "createdById", referencedColumnName = "id")
+    private DangNhap createById;
 
     public String getNgayThangFormatted() {
         return ngayThang.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-    }
-
-    public String getLoai() {
-        return loai;
-    }
-
-    public void setLoai(String loai) {
-        this.loai = loai;
-    }
-
-    public String getDanhMuc() {
-        return danhMuc;
-    }
-
-    public void setDanhMuc(String danhMuc) {
-        this.danhMuc = danhMuc;
-    }
-
-    public String getMoTa() {
-        return moTa;
-    }
-
-    public void setMoTa(String moTa) {
-        this.moTa = moTa;
-    }
-
-    public double getSoTien() {
-        return soTien;
-    }
-
-    public void setSoTien(double soTien) {
-        this.soTien = soTien;
-    }
-
-    public Long getCreatedById() {
-        return createdById;
-    }
-
-    public void setCreatedById(Long createdById) {
-        this.createdById = createdById;
     }
 }

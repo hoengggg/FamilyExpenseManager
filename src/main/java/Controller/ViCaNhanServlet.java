@@ -22,9 +22,7 @@ public class ViCaNhanServlet extends HttpServlet {
             return;
         }
 
-        Long UserId = currentUser.getId();
-
-        req.setAttribute("listViCaNhan", repo.getAll(UserId));
+        req.setAttribute("listViCaNhan", repo.getAll(currentUser));
         req.getRequestDispatcher("/View/vi_ca_nhan.jsp").forward(req, resp);
     }
 }

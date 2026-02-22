@@ -1,169 +1,97 @@
 package Repository;
 
-import Entity.GiaoDichVaTongQuan;
+import Entity.DangNhap;
+import Entity.MucTieu;
 import Entity.ViCaNhan;
-import helper.DbConnector;
+import helper.HibernateConfig;
+import jakarta.persistence.Query;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
+
 public class ViCaNhanRepository {
-    private Connection con = null;
-    private PreparedStatement ps = null;
-    private ResultSet rs = null;
-    private String sql = null;
+    public List<ViCaNhan> getAll(DangNhap user){
+        try (Session session = HibernateConfig.getFACTORY().openSession()) {
 
-    public ViCaNhanRepository() {
-        try {
-            con = DbConnector.getConnection();
-        }catch (Exception e){
-            e.printStackTrace();
+            Query query = session.createQuery(
+                    "select vcn from ViCaNhan vcn where vcn.createById = :user",
+                    ViCaNhan.class
+            );
+
+            query.setParameter("user", user);
+
+            return query.getResultList();
         }
     }
 
-    private static List<ViCaNhan> viCaNhans = new ArrayList<>();
+    public ViCaNhan Detail(Long id, DangNhap user){
+        try (Session session = HibernateConfig.getFACTORY().openSession()) {
 
-    public List<ViCaNhan> getAll(Long userId){
-        List<ViCaNhan> list = new ArrayList<>();
-        try {
-            Connection connection = DbConnector.getConnection();
-            String sql = "select * from ViCaNhan where createdById = ?";
-            PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setLong(1, userId);
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()){
-                Long id = rs.getLong("id");
-                LocalDate ngayThang = rs.getDate("ngayThang").toLocalDate();
-                String loai = rs.getString("loai");
-                String danhMuc= rs.getString("danhMuc");
-                String moTa = rs.getString("moTa");
-                Double soTien = rs.getDouble("soTien");
-                Long createdById = rs.getLong("createdById");
+            Query query = session.createQuery(
+                    "select vcn from ViCaNhan vcn where vcn.id = :id and vcn.createById = :user",
+                    ViCaNhan.class
+            );
 
-                ViCaNhan viCaNhan = new ViCaNhan();
-                viCaNhan.setId(id);
-                viCaNhan.setNgayThang(ngayThang);
-                viCaNhan.setLoai(loai);
-                viCaNhan.setDanhMuc(danhMuc);
-                viCaNhan.setMoTa(moTa);
-                viCaNhan.setSoTien(soTien);
-                viCaNhan.setCreatedById(createdById);
+            query.setParameter("id", id);
+            query.setParameter("user", user);
 
-                list.add(viCaNhan);
+            List<ViCaNhan> list = query.getResultList();
+            return list.isEmpty() ? null : list.get(0);
+        }
+    }
+
+    public void xoa(Long id, DangNhap user){
+        Transaction transaction = null;
+
+        try (Session session = HibernateConfig.getFACTORY().openSession()) {
+            transaction = session.beginTransaction();
+
+            Query query = session.createQuery(
+                    "select vcn from ViCaNhan vcn where vcn.id = :id and vcn.createById = :user",
+                    ViCaNhan.class
+            );
+
+            query.setParameter("id", id);
+            query.setParameter("user", user);
+
+            List<ViCaNhan> list = query.getResultList();
+
+            if(!list.isEmpty()){
+                session.delete(list.get(0));
             }
-        }catch (Exception e){
+
+            transaction.commit();
+        } catch (Exception e){
+            if(transaction != null) transaction.rollback();
             e.printStackTrace();
         }
-        return list;
     }
 
-    public static void main(String[] args) throws Exception {
-        Connection connection = DbConnector.getConnection();
-        Statement statement = connection.createStatement();
-        ResultSet rs = statement.executeQuery("select * from ViCaNhan");
-        while (rs.next()) {
-            System.out.println(rs.getString("moTa"));
-        }
-    }
+    public void them(ViCaNhan vcn){
+        Transaction transaction = null;
 
-    public ViCaNhan Detail(int id_Tim, Long userId){
-        sql = "select id, ngayThang, loai, danhMuc, moTa, soTien, createdById from ViCaNhan\n" + "where id = ? and where createdById = ?";
-        ViCaNhan vcn = new ViCaNhan();
-        try {
-            ps = con.prepareStatement(sql);
-            ps.setObject(1, id_Tim);
-            ps.setLong(2, userId);
-            rs = ps.executeQuery();
-            if(rs.next()){
-                Long id;
-                java.sql.Date sqlDate;
-                LocalDate ngayThang;
-                String loai;
-                String danhMuc;
-                String moTa;
-                Double soTien;
-                Long createdById;
-
-                id = rs.getLong(1);
-                sqlDate = rs.getDate(2);
-                ngayThang = (sqlDate != null) ? sqlDate.toLocalDate() : null;
-                loai = rs.getString(3);
-                danhMuc = rs.getString(4);
-                moTa = rs.getString(5);
-                soTien = rs.getDouble(6);
-                createdById = rs.getLong(7);
-
-                vcn = new ViCaNhan(id, ngayThang, loai, danhMuc, moTa, soTien, createdById);
-            }
-            return vcn;
-        }catch (Exception e){
+        try (Session session = HibernateConfig.getFACTORY().openSession()) {
+            transaction = session.beginTransaction();
+            session.save(vcn);
+            transaction.commit();
+        } catch (Exception e){
+            if(transaction != null) transaction.rollback();
             e.printStackTrace();
-            return null;
         }
     }
 
-    public int xoa(int id, Long userId){
-        sql = "delete from ViCaNhan \n" + "where id = ? and createdById = ?";
-        try {
-            ps = con.prepareStatement(sql);
-            ps.setObject(1, id);
-            ps.setLong(2, userId);
-            return ps.executeUpdate();
-        }catch (Exception e){
+    public void sua(ViCaNhan vcn){
+        Transaction transaction = null;
+
+        try (Session session = HibernateConfig.getFACTORY().openSession()) {
+            transaction = session.beginTransaction();
+            session.merge(vcn);
+            transaction.commit();
+        } catch (Exception e){
+            if(transaction != null) transaction.rollback();
             e.printStackTrace();
-            return 0;
         }
-    }
-
-    public int them(LocalDate ngayThang, String loai, String danhMuc, String moTa, Double soTien, Long createdById){
-        sql = "insert into ViCaNhan(ngayThang, loai, danhMuc, moTa, soTien, createdById)\n" + "values(?,?,?,?,?,?)";
-        try {
-            ps = con.prepareStatement(sql);
-
-            java.sql.Date sqlDate = java.sql.Date.valueOf(ngayThang);
-
-            ps.setObject(1, sqlDate);
-            ps.setObject(2, loai);
-            ps.setObject(3, danhMuc);
-            ps.setObject(4, moTa);
-            ps.setObject(5, soTien);
-            ps.setObject(6, createdById);
-
-            return ps.executeUpdate();
-        }catch (Exception e){
-            e.printStackTrace();
-            return 0;
-        }
-    }
-
-    public int sua(LocalDate ngayThang, String loai, String danhMuc, String moTa, Double soTien, Long createdById, int id_update){
-        sql = "update ViCaNhan set ngayThang=?, loai=?, danhMuc=?, moTa=?, soTien=?, createdById=? " +
-                "where id=?";
-        try {
-            ps = con.prepareStatement(sql);
-
-            java.sql.Date sqlDate = java.sql.Date.valueOf(ngayThang);
-
-            ps.setObject(1, sqlDate);
-            ps.setObject(2, loai);
-            ps.setObject(3, danhMuc);
-            ps.setObject(4, moTa);
-            ps.setObject(5, soTien);
-            ps.setObject(6, createdById);
-            ps.setObject(7, id_update);
-            return ps.executeUpdate();
-        }catch (Exception e){
-            e.printStackTrace();
-            return 0;
-        }
-    }
-
-    public static List<ViCaNhan> getGiaoDich(){
-        return viCaNhans; // giữ nguyên theo bản gốc
     }
 }

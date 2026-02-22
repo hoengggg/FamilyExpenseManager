@@ -30,13 +30,13 @@ public class MucTieuDeleteServlet extends HttpServlet {
         // ✅ Bổ sung kiểm tra quyền
         if (mt != null && (
                 "Parents".equals(currentUser.getPhanQuyen())
-                        || mt.getCreatedById().equals(currentUser.getId())
+                        || mt.getCreateById().getId().equals(currentUser.getId())
         )) {
             repo.xoa(id);
             req.setAttribute("message", "Xoa thanh cong");
             resp.sendRedirect(req.getContextPath() + "/muc_tieu");
         } else {
-            resp.getWriter().println("<script>alert('Bạn không có quyền xóa mục tiêu này'); window.history.back();</script>");
+            resp.getWriter().println("<script>alert('Ban khong co quyen xoa muc tieu nay'); window.history.back();</script>");
         }
     }
 }

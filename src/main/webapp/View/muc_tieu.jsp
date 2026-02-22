@@ -222,7 +222,7 @@
                 <td>
                     <a href="${pageContext.request.contextPath}/muc_tieu/update?id=${mt.id}" class="btn-view">Xem</a>
                     <a href="${pageContext.request.contextPath}/muc_tieu/delete?id=${mt.id}" class="btn-delete"
-                       onclick="return checkDelete(${mt.createdById}, '${currentUser.phanQuyen}', ${currentUser.id})">Xóa</a>
+                       onclick="return checkDelete(${mt.createById}, '${currentUser.phanQuyen}', ${currentUser.id})">Xóa</a>
                 </td>
             </tr>
         </c:forEach>
@@ -237,8 +237,8 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>
-    function checkDelete(createdById, role, currentUserId) {
-        if (role === 'Parents' || createdById === currentUserId) {
+    function checkDelete(createById, role, currentUserId) {
+        if (role === 'Parents' || createById === currentUserId) {
             return confirm('Bạn có chắc muốn xóa ko');
         } else {
             alert('Bạn không có quyền xóa');
@@ -246,8 +246,8 @@
         }
     }
 
-    function checkUpdate(createdById, role, currentUserId) {
-        if (role === 'Parents' || createdById === currentUserId) {
+    function checkUpdate(createById, role, currentUserId) {
+        if (role === 'Parents' || createById === currentUserId) {
             return confirm('Bạn có chắc muốn sửa ko');
         } else {
             alert('Bạn không có quyền sửa');

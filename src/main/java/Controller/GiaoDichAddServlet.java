@@ -2,6 +2,7 @@ package Controller;
 
 import Entity.DangNhap;
 import Entity.EmailData;
+import Entity.GiaoDichVaTongQuan;
 import Repository.GiaoDichVaTongQuanRepository;
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebServlet;
@@ -42,13 +43,9 @@ public class GiaoDichAddServlet extends HttpServlet {
         Double soTien = Double.parseDouble(req.getParameter("soTien"));
 
         DangNhap currentUser = (DangNhap) req.getSession().getAttribute("currentUser");
-        if (currentUser == null) {
-            resp.sendRedirect(req.getContextPath() + "/dang_nhap");
-            return;
-        }
 
-        Long createdById = currentUser.getId();
-        repo.them(ngayThang, loai, danhMuc, moTa, soTien, createdById);
+        GiaoDichVaTongQuan giaoDichVaTongQuan = new GiaoDichVaTongQuan(null, ngayThang, loai, danhMuc, moTa, soTien, currentUser);
+        repo.them(giaoDichVaTongQuan);
 
         try {
             GmailSender sender = GmailSender.getInstance();

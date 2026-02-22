@@ -34,13 +34,9 @@ public class ViCaNhanAddServlet extends HttpServlet {
         String mota = req.getParameter("moTa");
         Double sotien = Double.parseDouble(req.getParameter("soTien"));
         DangNhap currentUser = (DangNhap) req.getSession().getAttribute("currentUser");
-        if (currentUser == null) {
-            resp.sendRedirect(req.getContextPath() + "/dang_nhap");
-            return;
-        }
 
-        Long createdById = currentUser.getId();
-        repo.them(ngayThang, loai, danhmuc, mota, sotien, createdById);
+        ViCaNhan viCaNhan = new ViCaNhan(null, ngayThang, loai, danhmuc, mota, sotien, currentUser);
+        repo.them(viCaNhan);
         resp.sendRedirect(req.getContextPath() + "/vi_ca_nhan");
     }
 }

@@ -16,10 +16,9 @@ public class ViCaNhanDeleteServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Integer id = Integer.parseInt(req.getParameter("id"));
+        Long id = Long.parseLong(req.getParameter("id"));
         DangNhap currentUser = (DangNhap) req.getSession().getAttribute("currentUser");
-        Long userId = currentUser.getId();
-        repo.xoa(id, userId);
+        repo.xoa(id, currentUser);
         resp.sendRedirect(req.getContextPath() + "/vi_ca_nhan");
     }
 }

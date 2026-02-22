@@ -1,6 +1,7 @@
 package Controller;
 
 import Entity.DangNhap;
+import Entity.MucTieu;
 import Repository.MucTieuRepository;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -40,20 +41,14 @@ public class MucTieuAddServlet extends HttpServlet {
         }
 
         DangNhap currentUser = (DangNhap) req.getSession().getAttribute("currentUser");
-        if (currentUser == null) {
-            resp.sendRedirect(req.getContextPath() + "/dang_nhap");
-            return;
-        }
-
-        // ✅ Sửa: gán đúng ID user đăng nhập
-        Long createdById = currentUser.getId();
 
         if (thoiHan.isBefore(LocalDate.now())) {
             resp.getWriter().println("<script>alert('Ko duoc dat thoi han la thoi gian trong qua khu'); window.history.back();</script>");
             return;
         }
 
-        repo.them(ten, tienHienTai, thoiHan, tienMucTieu, createdById);
+        MucTieu mucTieu = new MucTieu(null, ten, tienHienTai, thoiHan, tienMucTieu, currentUser);
+        repo.them(mucTieu);
 
         req.setAttribute("message", "Them thanh cong");
         resp.sendRedirect(req.getContextPath() + "/muc_tieu");

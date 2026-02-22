@@ -1,6 +1,7 @@
 package Controller;
 
 import Entity.DangNhap;
+import Entity.ViCaNhan;
 import Repository.ViCaNhanRepository;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -17,10 +18,13 @@ public class ViCaNhanDetailServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Integer id = Integer.parseInt(req.getParameter("id"));
+        Long id = Long.parseLong(req.getParameter("id"));
         DangNhap currentUser = (DangNhap) req.getSession().getAttribute("currentUser");
-        Long userId = currentUser.getId();
-        req.setAttribute("VCN_Tim", repo.Detail(id, userId));
+        if (currentUser == null) {
+            resp.sendRedirect(req.getContextPath() + "/dang_nhap");
+            return;
+        }
+        req.setAttribute("VCN_Tim", repo.Detail(id, currentUser));
         req.getRequestDispatcher("/View/DetailViCaNhan.jsp").forward(req, resp);
     }
 
@@ -32,6 +36,7 @@ public class ViCaNhanDetailServlet extends HttpServlet {
         String danhmuc = req.getParameter("danhMuc");
         String mota = req.getParameter("moTa");
         Double sotien = Double.parseDouble(req.getParameter("soTien"));
+
         DangNhap currentUser = (DangNhap) req.getSession().getAttribute("currentUser");
         if (currentUser == null) {
             resp.sendRedirect(req.getContextPath() + "/dang_nhap");
@@ -39,8 +44,21 @@ public class ViCaNhanDetailServlet extends HttpServlet {
         }
 
         Long createdById = currentUser.getId();
-        Integer id = Integer.parseInt(req.getParameter("id"));
-        repo.sua(ngayThang, loai, danhmuc, mota, sotien, createdById, id);
+        Long id = Long.parseLong(req.getParameter("id"));
+
+        ViCaNhan existing = repo.Detail(id, currentUser);
+        if (existing == null) {
+            resp.getWriter().println("<script>alert('Không có quyền sửa'); window.history.back();</script>");
+            return;
+        }
+
+        existing.setNgayThang(ngayThang);
+        existing.setLoai(loai);
+        existing.setDanhMuc(danhmuc);
+        existing.setMoTa(mota);
+        existing.setSoTien(sotien);
+
+        repo.sua(existing);
         resp.sendRedirect(req.getContextPath() + "/vi_ca_nhan");
     }
 }

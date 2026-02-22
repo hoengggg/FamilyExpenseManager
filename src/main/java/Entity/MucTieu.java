@@ -1,73 +1,44 @@
 package Entity;
 
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity
+@Table(name = "MucTieu")
 public class MucTieu {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(name = "ten")
     private String ten;
-    private double tienHienTai;
+
+    @Column(name = "tienHienTai")
+    private Double tienHienTai;
+
+    @Column(name = "thoiHan")
     private LocalDate thoiHan;
-    private double tienMucTieu;
-    private Long createdById;
 
-    public MucTieu() {
-    }
+    @Column(name = "tienMucTieu")
+    private Double tienMucTieu;
 
-    public MucTieu(Long id, String ten, double tienHienTai, LocalDate thoiHan, double tienMucTieu, Long createdById) {
-        this.id = id;
-        this.ten = ten;
-        this.tienHienTai = tienHienTai;
-        this.thoiHan = thoiHan;
-        this.tienMucTieu = tienMucTieu;
-        this.createdById = createdById;
-    }
-
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getTen() {
-        return ten;
-    }
-
-    public void setTen(String ten) {
-        this.ten = ten;
-    }
-
-    public double getTienHienTai() {
-        return tienHienTai;
-    }
-
-    public void setTienHienTai(double tienHienTai) {
-        this.tienHienTai = tienHienTai;
-    }
-
-    public LocalDate getThoiHan() {
-        return thoiHan;
-    }
-
-    public void setThoiHan(LocalDate thoiHan) {
-        this.thoiHan = thoiHan;
-    }
-
+    @ManyToOne
+    @JoinColumn(name = "createdById", referencedColumnName = "id")
+    private DangNhap createById;
 
     public String getThoiHanFormatted() {
         return thoiHan.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-    }
-
-
-    public double getTienMucTieu() {
-        return tienMucTieu;
-    }
-
-    public void setTienMucTieu(double tienMucTieu) {
-        this.tienMucTieu = tienMucTieu;
     }
 
     public double getTienDo(){  //sau khi làm 2 cái get này thì lấy phần tên đằng sau chữ get của nó, chữ cái đầu ko vt hoa cho vào ${MucTieu....}
@@ -79,18 +50,10 @@ public class MucTieu {
         return tienMucTieu - tienHienTai;
     }
 
-    public Long getCreatedById() {
-        return createdById;
-    }
-    public void setCreatedById(Long createdById) {
-        this.createdById = createdById;
-    }
-
     public long getNgayConLai() {
         if (thoiHan == null) return 0;
         LocalDate today = LocalDate.now();
         if (thoiHan.isBefore(today)) return 0;
         return ChronoUnit.DAYS.between(today, thoiHan);
     }
-
 }

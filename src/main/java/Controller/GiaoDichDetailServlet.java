@@ -50,13 +50,20 @@ public class GiaoDichDetailServlet extends HttpServlet {
             return;
         }
 
-        GiaoDichVaTongQuan gd = repo.Detail(id_update);
+        GiaoDichVaTongQuan gd = repo.Detail(id_update); //tại sao lại cần cả cái này
 
         if (gd != null && (
                 "Parents".equals(currentUser.getPhanQuyen())
-                        || gd.getCreatedById().equals(currentUser.getId())
+                        || gd.getCreateById().getId().equals(currentUser.getId())
         )) {
-            repo.sua(ngayThang, loai, danhMuc, moTa, soTien, gd.getCreatedById(), id_update);
+
+            gd.setNgayThang(ngayThang);
+            gd.setLoai(loai);
+            gd.setDanhMuc(danhMuc);
+            gd.setMoTa(moTa);
+            gd.setSoTien(soTien);
+
+            repo.sua(gd);
             resp.sendRedirect(req.getContextPath() + "/giao_dich");
         } else {
             resp.getWriter().println("<script>alert('Ban ko co quyen sua'); window.history.back();</script>");

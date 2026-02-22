@@ -145,7 +145,7 @@
 <jsp:include page="/View/views/fragments/header.jsp" />
 <div class="header">
     <h1 class="qlct">Quản lý chi tiêu</h1>
-    <p>Quản lý các khoản thu chi của bạn</p>
+    <p>Quản lý các khoản thu chi của gia đình</p>
 </div>
 
 <div class="menu-bar">

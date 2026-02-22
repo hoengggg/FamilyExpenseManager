@@ -64,12 +64,17 @@ public class MucTieuDetailServlet extends HttpServlet {
 
         if (mt != null && (
                 "Parents".equals(currentUser.getPhanQuyen())
-                        || (mt.getCreatedById() != null && mt.getCreatedById().equals(currentUser.getId()))
+                        || mt.getCreateById().getId().equals(currentUser.getId())
         )) {
-            repo.sua(ten, tienHienTai, thoiHan, tienMucTieu, mt.getCreatedById(), id_update);
+            mt.setTen(ten);
+            mt.setTienHienTai(tienHienTai);
+            mt.setThoiHan(thoiHan);
+            mt.setTienMucTieu(tienMucTieu);
+
+            repo.sua(mt);
             resp.sendRedirect(req.getContextPath() + "/muc_tieu");
         } else {
-            resp.getWriter().println("<script>alert('Bạn không có quyền sửa mục tiêu này'); window.history.back();</script>");
+            resp.getWriter().println("<script>alert('Ban khong co quyen sua muc tieu nay'); window.history.back();</script>");
         }
     }
 }

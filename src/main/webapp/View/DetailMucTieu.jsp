@@ -84,7 +84,7 @@
     <input type="date" name="thoiHan" class="form-input" value="${mucTieuXem.thoiHan}" required/>
 
     <button type="submit" class="update-transaction-btn"
-            onclick="return checkUpdate(${mucTieuXem.createdById}, '${currentUser.phanQuyen}', ${currentUser.id})">
+            onclick="return checkUpdate(${mucTieuXem.createById}, '${currentUser.phanQuyen}', ${currentUser.id})">
         Cập nhật
     </button>
 </form>

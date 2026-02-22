@@ -1,50 +1,28 @@
 package Entity;
 
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity
+@Table(name = "DangNhap")
 public class DangNhap {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(name = "phanQuyen")
     private String phanQuyen;
+
+    @Column(name = "tenDangNhap")
     private String tenDangNhap;
+
+    @Column(name = "matKhau")
     private String matKhau;
-
-    public DangNhap() {
-    }
-
-    public DangNhap(Long id, String phanQuyen, String tenDangNhap, String matKhau) {
-        this.id = id;
-        this.phanQuyen = phanQuyen;
-        this.tenDangNhap = tenDangNhap;
-        this.matKhau = matKhau;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getPhanQuyen() {
-        return phanQuyen;
-    }
-
-    public void setPhanQuyen(String phanQuyen) {
-        this.phanQuyen = phanQuyen;
-    }
-
-    public String getTenDangNhap() {
-        return tenDangNhap;
-    }
-
-    public void setTenDangNhap(String tenDangNhap) {
-        this.tenDangNhap = tenDangNhap;
-    }
-
-    public String getMatKhau() {
-        return matKhau;
-    }
-
-    public void setMatKhau(String matKhau) {
-        this.matKhau = matKhau;
-    }
 }

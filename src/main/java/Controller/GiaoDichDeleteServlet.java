@@ -26,7 +26,7 @@ public class GiaoDichDeleteServlet extends HttpServlet {
 
         if (gd != null && (
                 "Parents".equals(currentUser.getPhanQuyen())
-                        || gd.getCreatedById().equals(currentUser.getId())
+                        || gd.getCreateById().getId().equals(currentUser.getId())
         )) {
             repo.xoa(id);
             resp.sendRedirect(req.getContextPath() + "/giao_dich");
