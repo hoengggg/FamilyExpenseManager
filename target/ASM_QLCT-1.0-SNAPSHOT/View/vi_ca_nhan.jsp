@@ -3,7 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
-    <title>Giao dịch</title>
+    <title>Ví cá nhân</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
@@ -96,6 +96,12 @@
             transition: background-color 0.3s;
         }
         .add-transaction-btn:hover { background-color: #2196F3; }
+
+        .header-actions{
+            display: flex;
+            gap: 15px;   /* khoảng cách giữa combobox và nút */
+            align-items: center;
+        }
         .bangTT {
             width: 100%;
             border-collapse: collapse;
@@ -193,9 +199,25 @@
 <div class="summary-container">
     <div class="transaction-header">
         <h3 class="transaction-title">Danh sách giao dịch</h3>
-        <form method="get" action="${pageContext.request.contextPath}/vi_ca_nhan/add">
-            <button type="submit" class="add-transaction-btn">Thêm giao dịch</button>
-        </form>
+        <div class="header-actions">
+            <form method="get" action="${pageContext.request.contextPath}/vi_ca_nhan/search">
+                <div class="input-group mb-3">
+                    <input type="text" name="mota" class="form-control" aria-label="Recipient’s username" aria-describedby="button-addon2" required>
+                    <button class="btn btn-outline-secondary" id="button-addon2">Tìm kiếm</button>
+                </div>
+            </form>
+
+            <form method="get" action="${pageContext.request.contextPath}/vi_ca_nhan/filter">
+                <select name="loai" onchange="this.form.submit()" class="form-select" aria-label="Default select example">
+                    <option value="" ${loai == null ? "selected" : ""}>Tất cả</option>
+                    <option value="Thu vào" ${loai == "Thu vào" ? "selected" : ""}>Thu vào</option>
+                    <option value="Chi ra" ${loai == "Chi ra" ? "selected" : ""}>Chi ra</option>
+                </select>
+            </form>
+            <form method="get" action="${pageContext.request.contextPath}/vi_ca_nhan/add">
+                <button type="submit" class="add-transaction-btn">Thêm giao dịch</button>
+            </form>
+        </div>
     </div>
     <table class="bangTT">
         <tr>

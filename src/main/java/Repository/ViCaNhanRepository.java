@@ -1,6 +1,7 @@
 package Repository;
 
 import Entity.DangNhap;
+import Entity.GiaoDichVaTongQuan;
 import Entity.MucTieu;
 import Entity.ViCaNhan;
 import helper.HibernateConfig;
@@ -16,7 +17,7 @@ public class ViCaNhanRepository {
         try (Session session = HibernateConfig.getFACTORY().openSession()) {
 
             Query query = session.createQuery(
-                    "select vcn from ViCaNhan vcn where vcn.createById = :user",
+                    "select vcn from ViCaNhan vcn where vcn.createById = :user order by vcn.ngayThang desc",
                     ViCaNhan.class
             );
 
@@ -94,4 +95,24 @@ public class ViCaNhanRepository {
             e.printStackTrace();
         }
     }
+
+    //createById là khoá ngoại đăng nhập với ví cá nhân và giao dịch và nó kết nối vs id ở bảng này và bảng giao dịch
+    public List<ViCaNhan> loctheoloai(String loai, Long userId){
+        Session session = HibernateConfig.getFACTORY().openSession();
+        //bước này là để tạo câu query
+        Query query = session.createQuery("select vcn from ViCaNhan vcn where vcn.createById.id = :userid and (:loai is null or vcn.loai = :loai) order by vcn.ngayThang desc", ViCaNhan.class);
+        query.setParameter("loai", loai);
+        query.setParameter("userid", userId);
+        List<ViCaNhan> list = query.getResultList(); //dòng này tác dụng là chạy câu query ở trên và nhận lấy danh sách mà db trả về
+        session.close();
+        return list;
+    }
+
+    public List<ViCaNhan> timkiem(String moTa){
+        Session session = HibernateConfig.getFACTORY().openSession();
+        Query query = session.createQuery("select vcn from ViCaNhan vcn where vcn.moTa like :moTa");
+        query.setParameter("moTa", "%" + moTa + "%");
+        return query.getResultList();
+    }
+
 }

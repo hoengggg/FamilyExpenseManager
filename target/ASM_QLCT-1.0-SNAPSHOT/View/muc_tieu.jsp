@@ -97,6 +97,13 @@
             transition: background-color 0.3s;
         }
         .add-transaction-btn:hover { background-color: #2196F3; }
+
+        .header-actions{
+            display: flex;
+            gap: 15px;   /* khoảng cách giữa combobox và nút */
+            align-items: center;
+        }
+
         .bangTT {
             width: 100%;
             border-collapse: collapse;
@@ -194,9 +201,18 @@
 <div class="summary-container">
     <div class="transaction-header">
         <h3 class="transaction-title">Danh sách mục tiêu</h3>
-        <form method="get" action="${pageContext.request.contextPath}/muc_tieu/add">
-            <button type="submit" class="add-transaction-btn">Thêm mục tiêu</button>
-        </form>
+        <div class="header-actions">
+            <form method="get" action="${pageContext.request.contextPath}/muc_tieu/search">
+                <div class="input-group mb-3">
+                    <input type="text" name="ten" class="form-control" aria-label="Recipient’s username" aria-describedby="button-addon2" required>
+                    <button class="btn btn-outline-secondary" id="button-addon2">Tìm kiếm</button>
+                </div>
+            </form>
+            <form method="get" action="${pageContext.request.contextPath}/muc_tieu/add">
+                <button type="submit" class="add-transaction-btn">Thêm mục tiêu</button>
+            </form>
+        </div>
+
     </div>
     <table class="bangTT">
         <tr>

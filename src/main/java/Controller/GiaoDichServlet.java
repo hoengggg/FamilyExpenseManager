@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.util.List;
 
 @WebServlet("/giao_dich")
-public class GiaoDich extends HttpServlet {
+public class GiaoDichServlet extends HttpServlet {
     private GiaoDichVaTongQuanRepository repo = new GiaoDichVaTongQuanRepository();
 
     @Override

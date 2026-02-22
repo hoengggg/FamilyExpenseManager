@@ -1,7 +1,9 @@
 package Repository;
 
 import Entity.MucTieu;
+import Entity.ViCaNhan;
 import helper.HibernateConfig;
+import jakarta.persistence.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -64,5 +66,12 @@ public class MucTieuRepository {
             if(transaction != null) transaction.rollback();
             e.printStackTrace();
         }
+    }
+
+    public List<MucTieu> timkiem(String ten){
+        Session session = HibernateConfig.getFACTORY().openSession();
+        Query query = session.createQuery("select mt from MucTieu mt where mt.ten like :ten");
+        query.setParameter("ten", "%" + ten + "%");
+        return query.getResultList();
     }
 }
