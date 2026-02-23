@@ -40,28 +40,8 @@ public class GiaoDichVaTongQuan {
     @JoinColumn(name = "createdById", referencedColumnName = "id")
     private DangNhap createById;
 
-
     public String getNgayThangFormatted() {
         return ngayThang.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
     }
 
-    public static double getTongThu() {
-        GiaoDichVaTongQuanRepository repo = new GiaoDichVaTongQuanRepository();
-        return repo.getAll().stream()
-                .filter(gd -> "Thu vào".equalsIgnoreCase(gd.getLoai()))
-                .mapToDouble(GiaoDichVaTongQuan::getSoTien)
-                .sum();
-    }
-
-    public static double getTongChi() {
-        GiaoDichVaTongQuanRepository repo = new GiaoDichVaTongQuanRepository();
-        return repo.getAll().stream()
-                .filter(gd -> "Chi ra".equalsIgnoreCase(gd.getLoai()))
-                .mapToDouble(GiaoDichVaTongQuan::getSoTien)
-                .sum();
-    }
-
-    public static double getTongTien() {
-        return getTongThu() - getTongChi();
-    }
 }

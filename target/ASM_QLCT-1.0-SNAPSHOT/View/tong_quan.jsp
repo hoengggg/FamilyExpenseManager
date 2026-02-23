@@ -217,7 +217,27 @@
         </div>
     </div>
 
+    <div style="width: 830px; margin: 40px auto 0 auto; display: flex; justify-content: flex-end;">
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle"
+                    type="button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                ${selectedYear}
+            </button>
 
+            <ul class="dropdown-menu text-center">
+                <c:forEach var="y" items="${years}">
+                    <li>
+                        <a class="dropdown-item ${y == selectedYear ? 'active' : ''}"
+                           href="${pageContext.request.contextPath}/tong_quan?year=${y}">
+                                ${y}
+                        </a>
+                    </li>
+                </c:forEach>
+            </ul>
+        </div>
+    </div>
     <div class="summary-container">
         <div class="summary-box thu">
             <fmt:setLocale value="vi_VN"/>

@@ -3,10 +3,12 @@ package Repository;
 import Entity.GiaoDichVaTongQuan;
 import Entity.ViCaNhan;
 import helper.HibernateConfig;
-import jakarta.persistence.Query;
+
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
+import java.time.LocalDate;
 import java.util.List;
 
 
@@ -86,4 +88,69 @@ public class GiaoDichVaTongQuanRepository {
         query.setParameter("moTa", "%" + moTa + "%");
         return query.getResultList();
     }
+
+    public List<Integer> getAllYear() {
+        try (Session session = HibernateConfig.getFACTORY().openSession()) {
+            Query<Integer> query = session.createQuery(
+                    "select distinct function('year', g.ngayThang) " +
+                            "from GiaoDichVaTongQuan g",
+                    Integer.class
+            );
+            List<Integer> years = query.getResultList();
+            years.sort(Integer::compareTo); // sắp xếp tăng dần
+            return years;
+        }
+    }
+
+    public Double tongThuTheoNam(int year) {
+        try (Session session = HibernateConfig.getFACTORY().openSession()) {
+
+            LocalDate start = LocalDate.of(year, 1, 1);
+            LocalDate end = LocalDate.of(year, 12, 31);
+
+            Query<Double> query = session.createQuery(
+                    "select sum(g.soTien) " +
+                            "from GiaoDichVaTongQuan g " +
+                            "where g.ngayThang >= :start " +
+                            "and g.ngayThang <= :end " +
+                            "and trim(g.loai) = :loai",
+                    Double.class
+            );
+
+            query.setParameter("start", start);
+            query.setParameter("end", end);
+            query.setParameter("loai", "Thu vào");
+
+            Double result = query.getSingleResult();
+            return result == null ? 0 : result;
+        }
+    }
+    public Double tongChiTheoNam(int year) {
+        try (Session session = HibernateConfig.getFACTORY().openSession()) {
+
+            LocalDate start = LocalDate.of(year, 1, 1);
+            LocalDate end = LocalDate.of(year, 12, 31);
+
+            Query<Double> query = session.createQuery(
+                    "select sum(g.soTien) " +
+                            "from GiaoDichVaTongQuan g " +
+                            "where g.ngayThang >= :start " +
+                            "and g.ngayThang <= :end " +
+                            "and trim(g.loai) = :loai",
+                    Double.class
+            );
+
+            query.setParameter("start", start);
+            query.setParameter("end", end);
+            query.setParameter("loai", "Chi ra");
+
+            Double result = query.getSingleResult();
+            return result == null ? 0 : result;
+        }
+    }
+
+    public Double tongTien(int year) {
+        return tongThuTheoNam(year) - tongChiTheoNam(year);
+    }
+
 }

@@ -203,9 +203,9 @@
 
         <div class="header-actions">
             <form method="get" action="${pageContext.request.contextPath}/giao_dich/search">
-                <div class="input-group mb-3">
+                <div class="input-group">
                     <input type="text" name="mota" class="form-control" aria-label="Recipient’s username" aria-describedby="button-addon2" required>
-                    <button class="btn btn-outline-secondary" id="button-addon2">Tìm kiếm</button>
+                    <button class="btn btn-outline-secondary" type="button" id="button-addon2">Tìm kiếm</button>
                 </div>
             </form>
 
