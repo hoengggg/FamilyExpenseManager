@@ -194,6 +194,29 @@
 
 <div class="summary-container">
     <h3>Biểu đồ thu chi theo tháng</h3>
+
+    <div style="width: 830px; margin: -42px auto 0 200px; display: flex; justify-content: flex-end;">
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle"
+                    type="button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                ${namduocchon}
+            </button>
+
+            <ul class="dropdown-menu text-center">
+                <c:forEach var="y" items="${years}">
+                    <li>
+                        <a class="dropdown-item ${y == namduocchon ? 'active' : ''}"
+                           href="${pageContext.request.contextPath}/ThongKe?year=${y}">
+                                ${y}
+                        </a>
+                    </li>
+                </c:forEach>
+            </ul>
+        </div>
+    </div>
+
     <canvas id="thuChiChart" width="900" height="400"></canvas>
 </div>
 

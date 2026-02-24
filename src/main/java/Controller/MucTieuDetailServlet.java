@@ -42,12 +42,19 @@ public class MucTieuDetailServlet extends HttpServlet {
             try {
                 thoiHan = LocalDate.parse(thoiHanStr);
             } catch (Exception e) {
-                resp.getWriter().println("<script>alert('Ngày tháng không hợp lệ, vui lòng nhập lại'); window.history.back();</script>");
+                resp.getWriter().println("<script>alert('Ngay thang ko hop le, vui long nhap lai'); window.history.back();</script>");
                 return;
             }
-            if (thoiHan.isBefore(LocalDate.now())) {
-                resp.getWriter().println("<script>alert('Không được đặt thời hạn là thời gian trong quá khứ'); window.history.back();</script>");
-                return;
+
+            MucTieu mt = repo.Detail(id_update);
+            if (thoiHan != null) {
+                LocalDate thoiHanCu = mt.getThoiHan();
+
+                // Chỉ chặn nếu người dùng đổi sang ngày mới và ngày đó ở quá khứ
+                if (!thoiHan.equals(thoiHanCu) && thoiHan.isBefore(LocalDate.now())) {
+                    resp.getWriter().println("<script>alert('Khong duoc dat thoi gian trong qua khu'); window.history.back();</script>");
+                    return;
+                }
             }
         }
 

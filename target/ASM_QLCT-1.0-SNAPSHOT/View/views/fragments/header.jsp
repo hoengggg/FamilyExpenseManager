@@ -19,10 +19,7 @@
                     <a class="nav-link" href="${pageContext.request.contextPath}/tong_quan?lang=en">English</a>
                 </li>
             </ul>
-<%--            <form class="d-flex">--%>
-<%--                <input class="form-control me-2" type="text" placeholder="Search">--%>
-<%--                <button class="btn btn-primary" type="button">Search</button>--%>
-<%--            </form>--%>
+                <span class="text-white">Xin chào: ${sessionScope.currentUser.tenDangNhap}</span>
         </div>
     </div>
 </nav>

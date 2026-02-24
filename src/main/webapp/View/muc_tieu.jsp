@@ -122,7 +122,7 @@
         }
         .bangTT tr:hover { background-color: #f9f9f9; }
         .action-buttons { display: flex; gap: 10px; }
-        .btn-view, .btn-delete {
+        .btn-view, .btn-delete, .btn-do {
             padding: 6px 12px;
             border-radius: 5px;
             text-decoration: none;
@@ -134,6 +134,12 @@
         .btn-view:hover { background-color: #1976D2; }
         .btn-delete { background-color: #F44336; }
         .btn-delete:hover { background-color: #D32F2F; }
+        .btn-do{
+            background-color: #4CAF50;
+        }
+        .btn-do:hover{
+            background-color: darkolivegreen;
+        }
         .sign-out {
             border: 0.3px solid black;
             border-radius: 10px;
@@ -223,6 +229,7 @@
             <th>Thời hạn</th>
             <th>Còn lại</th>
             <th>Mục tiêu</th>
+            <th>Người tạo</th>
             <th>Hoạt động</th>
         </tr>
         <fmt:setLocale value="vi_VN"/>
@@ -235,10 +242,21 @@
                 <td>${mt.thoiHanFormatted}</td>
                 <td>${mt.ngayConLai}</td>
                 <td><fmt:formatNumber value="${mt.tienMucTieu}" type="currency" currencyCode="VND"/></td>
+                <td>${mt.createById.tenDangNhap}</td>
                 <td>
-                    <a href="${pageContext.request.contextPath}/muc_tieu/update?id=${mt.id}" class="btn-view">Xem</a>
+                    <a href="${pageContext.request.contextPath}/muc_tieu/update?id=${mt.id}" class="btn-view"
+                       onclick="return checkUpdate(${mt.createById.id}, '${currentUser.phanQuyen}', ${currentUser.id})">Xem</a>
                     <a href="${pageContext.request.contextPath}/muc_tieu/delete?id=${mt.id}" class="btn-delete"
-                       onclick="return checkDelete(${mt.createById}, '${currentUser.phanQuyen}', ${currentUser.id})">Xóa</a>
+                       onclick="return checkDelete(${mt.createById.id}, '${currentUser.phanQuyen}', ${currentUser.id})">Xóa</a>
+                    <form action="${pageContext.request.contextPath}/muc_tieu/thuc_hien"
+                          method="post"
+                          style="display:inline;"
+                          onsubmit="return checkDo(${mt.createById.id}, '${currentUser.phanQuyen}', ${currentUser.id}, ${mt.tienDo})">
+                            <%--onsubmit ở trên là gọi function checkDo và gửi xuống id ng tạo,
+                            phân quyền để parents cx thực hiện đc và id người dùng đang đăng nhập, và tiến độ--%>
+                        <input type="hidden" name="id" value="${mt.id}" />
+                        <button type="submit" class="btn-do">Thực hiện</button>
+                    </form>
                 </td>
             </tr>
         </c:forEach>
@@ -254,8 +272,8 @@
 
 <script>
     function checkDelete(createById, role, currentUserId) {
-        if (role === 'Parents' || createById === currentUserId) {
-            return confirm('Bạn có chắc muốn xóa ko');
+        if (role === 'Parents' || createById === currentUserId) { //người có quyền thực hiện là parents và người tạo ra nó
+            return confirm('Bạn có chắc muốn xóa không');
         } else {
             alert('Bạn không có quyền xóa');
             return false;
@@ -263,12 +281,27 @@
     }
 
     function checkUpdate(createById, role, currentUserId) {
-        if (role === 'Parents' || createById === currentUserId) {
-            return confirm('Bạn có chắc muốn sửa ko');
+        if (role === 'Parents' || createById === currentUserId) { //người có quyền thực hiện là parents và người tạo ra nó
+            return confirm('Bạn có chắc muốn sửa không');
         } else {
             alert('Bạn không có quyền sửa');
             return false;
         }
+    }
+
+    function checkDo(createById, role, currentUserId, tienDo) {
+        if (role !== 'Parents' && createById !== currentUserId) { //kiểm tra xem nếu role ko phải Parents và id của
+            // người đang đăng nhập mà khác id ng tạo thì sẽ ra cái alert kia
+            alert('Bạn không có quyền thực hiện');
+            return false;
+        }
+
+        if (tienDo < 100) {
+            alert('Chưa đủ 100% tiến độ');
+            return false;
+        }
+
+        return confirm('Bạn có chắc muốn thực hiện không?');
     }
 </script>
 

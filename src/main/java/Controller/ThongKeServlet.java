@@ -23,20 +23,40 @@ public class ThongKeServlet extends HttpServlet {
             resp.sendRedirect(req.getContextPath() + "/dang_nhap");
             return;
         }
+
+        List<Integer> years = repo.getAllYear();
+        req.setAttribute("years", years);  //cái years này cho vào c:forEach của thongke jsp
+
+        String nam = req.getParameter("year");
+        int namduocchon;
+
+        if(nam != null){
+            namduocchon = Integer.parseInt(nam);    //kiểu nam != null tức là đã chọn năm thì sẽ ép kiểu năm đó từ String sang int
+        }else{
+            //nếu chx đc chọn lấy năm lớn/ mới nhất
+            namduocchon = years.get(years.size() - 1);
+        }
+
+        req.setAttribute("namduocchon", namduocchon);
+
+        //lấy giao dịch theo năm
         List<GiaoDichVaTongQuan> ds = repo.getAll();
 
         double[] tongThu = new double[12];
         double[] tongChi = new double[12];
 
-        for (int i = 1; i <= 12; i++){
+        for (int i = 1; i <= 12; i++) {
             int month = i;
+
             tongThu[i - 1] = ds.stream()
+                    .filter(gd -> gd.getNgayThang().getYear() == namduocchon)
                     .filter(gd -> "Thu vào".equalsIgnoreCase(gd.getLoai()))
                     .filter(gd -> gd.getNgayThang().getMonthValue() == month)
                     .mapToDouble(GiaoDichVaTongQuan::getSoTien)
                     .sum();
 
             tongChi[i - 1] = ds.stream()
+                    .filter(gd -> gd.getNgayThang().getYear() == namduocchon)
                     .filter(gd -> "Chi ra".equalsIgnoreCase(gd.getLoai()))
                     .filter(gd -> gd.getNgayThang().getMonthValue() == month)
                     .mapToDouble(GiaoDichVaTongQuan::getSoTien)

@@ -255,11 +255,11 @@
 <jsp:include page="/View/views/fragments/footer.jsp"/>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-<script>
-    function checkDelete() {
-            return confirm('Bạn có chắc muốn xóa ko');
-    }
-</script>
+<%--<script>--%>
+<%--    function checkDelete() {--%>
+<%--            return confirm('Bạn có chắc muốn xóa ko');--%>
+<%--    }--%>
+<%--</script>--%>
 
 </body>
 </html>

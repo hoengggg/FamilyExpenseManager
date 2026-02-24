@@ -230,6 +230,7 @@
             <th>Danh mục</th>
             <th>Mô tả</th>
             <th>Số tiền</th>
+            <th>Người tạo</th>
             <th>Hành động</th>
         </tr>
         <fmt:setLocale value="vi_VN"/>
@@ -240,6 +241,7 @@
                 <td>${gd.danhMuc}</td>
                 <td>${gd.moTa}</td>
                 <td><fmt:formatNumber value="${gd.soTien}" type="currency" currencyCode="VND"/></td>
+                <td>${gd.createById.tenDangNhap}</td>
                 <td>
                     <div class="action-buttons">
                         <a href="${pageContext.request.contextPath}/giao_dich/detail?id=${gd.id}" class="btn-view">Xem</a>
