@@ -3,6 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Mục tiêu</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
@@ -23,8 +24,11 @@
             background: #ecebed; /* NỀN XÁM NHẠT */
             padding: 1px 1px;
             border-radius: 80px; /* VIỀN BO TRÒN */
-            width: 1200px;
-            margin-left: 90px;
+            margin: 30px auto 0 auto;
+            max-width: 1200px;
+            width: 95%;
+            flex-wrap: wrap;
+            gap: 60px;
             justify-content: center;
         }
 
@@ -68,7 +72,9 @@
             font-size: 18px;
         }
         .summary-container {
-            margin: 40px 105px;
+            margin: 40px auto;
+            max-width: 1200px;
+            width: 95%;
             padding: 20px;
             border-radius: 20px;
             background-color: cornsilk;
@@ -153,6 +159,32 @@
         }
         .sign-out a { text-decoration: none; color: #ecebed; }
         .sign-out:hover { background-color: #2196F3; transform: scale(1.02); }
+
+        @media (max-width: 768px) {
+
+            .header {
+                margin-left: 20px;
+            }
+
+            .menu-bar {
+                border-radius: 20px;
+            }
+
+            .transaction-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+
+            .header-actions {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .sign-out {
+                margin: 20px auto;
+            }
+        }
     </style>
     </style>
 </head>
@@ -220,47 +252,49 @@
         </div>
 
     </div>
-    <table class="bangTT">
-        <tr>
-            <th>Tên</th>
-            <th>Tiến độ</th>
-            <th>Đã tiết kiệm</th>
-            <th>Còn thiếu</th>
-            <th>Thời hạn</th>
-            <th>Còn lại</th>
-            <th>Mục tiêu</th>
-            <th>Người tạo</th>
-            <th>Hoạt động</th>
-        </tr>
-        <fmt:setLocale value="vi_VN"/>
-        <c:forEach items="${mucTieus}" var="mt">
+    <div class="table-responsive">
+        <table class="bangTT">
             <tr>
-                <td>${mt.ten}</td>
-                <td>${mt.tienDo}</td>
-                <td><fmt:formatNumber value="${mt.tienHienTai}" type="currency" currencyCode="VND"/></td>
-                <td><fmt:formatNumber value="${mt.tienConThieu}" type="currency" currencyCode="VND"/></td>
-                <td>${mt.thoiHanFormatted}</td>
-                <td>${mt.ngayConLai}</td>
-                <td><fmt:formatNumber value="${mt.tienMucTieu}" type="currency" currencyCode="VND"/></td>
-                <td>${mt.createById.tenDangNhap}</td>
-                <td>
-                    <a href="${pageContext.request.contextPath}/muc_tieu/update?id=${mt.id}" class="btn-view"
-                       onclick="return checkUpdate(${mt.createById.id}, '${currentUser.phanQuyen}', ${currentUser.id})">Xem</a>
-                    <a href="${pageContext.request.contextPath}/muc_tieu/delete?id=${mt.id}" class="btn-delete"
-                       onclick="return checkDelete(${mt.createById.id}, '${currentUser.phanQuyen}', ${currentUser.id})">Xóa</a>
-                    <form action="${pageContext.request.contextPath}/muc_tieu/thuc_hien"
-                          method="post"
-                          style="display:inline;"
-                          onsubmit="return checkDo(${mt.createById.id}, '${currentUser.phanQuyen}', ${currentUser.id}, ${mt.tienDo})">
-                            <%--onsubmit ở trên là gọi function checkDo và gửi xuống id ng tạo,
-                            phân quyền để parents cx thực hiện đc và id người dùng đang đăng nhập, và tiến độ--%>
-                        <input type="hidden" name="id" value="${mt.id}" />
-                        <button type="submit" class="btn-do">Thực hiện</button>
-                    </form>
-                </td>
+                <th>Tên</th>
+                <th>Tiến độ</th>
+                <th>Đã tiết kiệm</th>
+                <th>Còn thiếu</th>
+                <th>Thời hạn</th>
+                <th>Còn lại</th>
+                <th>Mục tiêu</th>
+                <th>Người tạo</th>
+                <th>Hoạt động</th>
             </tr>
-        </c:forEach>
-    </table>
+            <fmt:setLocale value="vi_VN"/>
+            <c:forEach items="${mucTieus}" var="mt">
+                <tr>
+                    <td>${mt.ten}</td>
+                    <td>${mt.tienDo}</td>
+                    <td><fmt:formatNumber value="${mt.tienHienTai}" type="currency" currencyCode="VND"/></td>
+                    <td><fmt:formatNumber value="${mt.tienConThieu}" type="currency" currencyCode="VND"/></td>
+                    <td>${mt.thoiHanFormatted}</td>
+                    <td>${mt.ngayConLai}</td>
+                    <td><fmt:formatNumber value="${mt.tienMucTieu}" type="currency" currencyCode="VND"/></td>
+                    <td>${mt.createById.tenDangNhap}</td>
+                    <td>
+                        <a href="${pageContext.request.contextPath}/muc_tieu/update?id=${mt.id}" class="btn-view"
+                           onclick="return checkUpdate(${mt.createById.id}, '${currentUser.phanQuyen}', ${currentUser.id})">Xem</a>
+                        <a href="${pageContext.request.contextPath}/muc_tieu/delete?id=${mt.id}" class="btn-delete"
+                           onclick="return checkDelete(${mt.createById.id}, '${currentUser.phanQuyen}', ${currentUser.id})">Xóa</a>
+                        <form action="${pageContext.request.contextPath}/muc_tieu/thuc_hien"
+                              method="post"
+                              style="display:inline;"
+                              onsubmit="return checkDo(${mt.createById.id}, '${currentUser.phanQuyen}', ${currentUser.id}, ${mt.tienDo})">
+                                <%--onsubmit ở trên là gọi function checkDo và gửi xuống id ng tạo,
+                                phân quyền để parents cx thực hiện đc và id người dùng đang đăng nhập, và tiến độ--%>
+                            <input type="hidden" name="id" value="${mt.id}" />
+                            <button type="submit" class="btn-do">Thực hiện</button>
+                        </form>
+                    </td>
+                </tr>
+            </c:forEach>
+        </table>
+    </div>
 </div>
 
 <div class="sign-out">

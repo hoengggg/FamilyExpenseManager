@@ -13,6 +13,7 @@
 
 <html>
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Quản lý chi tiêu - Tổng quan</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <meta charset="UTF-8">
@@ -57,8 +58,11 @@
         background: #ecebed; /* NỀN XÁM NHẠT */
         padding: 1px 1px;
         border-radius: 80px; /* VIỀN BO TRÒN */
-        width: 1200px;
-        margin-left: 90px;
+        margin: 30px auto 0 auto;
+        max-width: 1200px;
+        width: 95%;
+        flex-wrap: wrap;
+        gap: 60px;
         justify-content: center;
     }
 
@@ -109,10 +113,12 @@
         gap: 40px; /* KHOẢNG CÁCH GIỮA 3 Ô */
         margin: 40px 0;
         margin-top: 60px; /* KHOẢNG CÁCH DỌC */
+        flex-wrap: wrap;
     }
 
     .summary-box {
-        width: 250px; /* CHIỀU RỘNG Ô */
+        width: 100%;
+        max-width: 250px;
         height: 120px; /* CHIỀU CAO Ô */
         border-radius: 12px;
         text-align: center;
@@ -161,6 +167,31 @@
         transform: scale(1.02);
     }
 
+    @media (max-width: 768px) {
+
+        .header {
+            margin-left: 20px;
+        }
+
+        .menu-bar {
+            border-radius: 20px;
+        }
+
+        .transaction-header {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .header-actions {
+            flex-direction: column;
+            width: 100%;
+        }
+
+        .sign-out {
+            margin: 20px auto;
+        }
+    }
 </style>
 
 <body class="body">

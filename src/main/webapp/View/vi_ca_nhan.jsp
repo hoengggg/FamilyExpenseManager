@@ -3,6 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Ví cá nhân</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
@@ -22,8 +23,11 @@
             background: #ecebed; /* NỀN XÁM NHẠT */
             padding: 1px 1px;
             border-radius: 80px; /* VIỀN BO TRÒN */
-            width: 1200px;
-            margin-left: 90px;
+            margin: 30px auto 0 auto;
+            max-width: 1200px;
+            width: 95%;
+            flex-wrap: wrap;
+            gap: 60px;
             justify-content: center;
         }
 
@@ -67,7 +71,9 @@
             font-size: 18px;
         }
         .summary-container {
-            margin: 40px 105px;
+            margin: 40px auto;
+            max-width: 1200px;
+            width: 95%;
             padding: 20px;
             border-radius: 20px;
             background-color: cornsilk;
@@ -145,6 +151,32 @@
         }
         .sign-out a { text-decoration: none; color: #ecebed; }
         .sign-out:hover { background-color: #2196F3; transform: scale(1.02); }
+
+        @media (max-width: 768px) {
+
+            .header {
+                margin-left: 20px;
+            }
+
+            .menu-bar {
+                border-radius: 20px;
+            }
+
+            .transaction-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+
+            .header-actions {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .sign-out {
+                margin: 20px auto;
+            }
+        }
     </style>
 </head>
 <body>
@@ -219,33 +251,35 @@
             </form>
         </div>
     </div>
-    <table class="bangTT">
-        <tr>
-            <th>Ngày</th>
-            <th>Loại</th>
-            <th>Danh mục</th>
-            <th>Mô tả</th>
-            <th>Số tiền</th>
-            <th>Hành động</th>
-        </tr>
-        <fmt:setLocale value="vi_VN"/>
-        <c:forEach items="${listViCaNhan}" var="vcn">
+    <div class="table-responsive">
+        <table class="bangTT">
             <tr>
-                <td>${vcn.ngayThangFormatted}</td>
-                <td>${vcn.loai}</td>
-                <td>${vcn.danhMuc}</td>
-                <td>${vcn.moTa}</td>
-                <td><fmt:formatNumber value="${vcn.soTien}" type="currency" currencyCode="VND"/></td>
-                <td>
-                    <div class="action-buttons">
-                        <a href="${pageContext.request.contextPath}/vi_ca_nhan/detail?id=${vcn.id}" class="btn-view">Xem</a>
-                        <a href="${pageContext.request.contextPath}/vi_ca_nhan/delete?id=${vcn.id}"
-                           class="btn-delete" onclick="return confirm('Bạn có chắc muốn xóa không?')">Xóa</a>
-                    </div>
-                </td>
+                <th>Ngày</th>
+                <th>Loại</th>
+                <th>Danh mục</th>
+                <th>Mô tả</th>
+                <th>Số tiền</th>
+                <th>Hành động</th>
             </tr>
-        </c:forEach>
-    </table>
+            <fmt:setLocale value="vi_VN"/>
+            <c:forEach items="${listViCaNhan}" var="vcn">
+                <tr>
+                    <td>${vcn.ngayThangFormatted}</td>
+                    <td>${vcn.loai}</td>
+                    <td>${vcn.danhMuc}</td>
+                    <td>${vcn.moTa}</td>
+                    <td><fmt:formatNumber value="${vcn.soTien}" type="currency" currencyCode="VND"/></td>
+                    <td>
+                        <div class="action-buttons">
+                            <a href="${pageContext.request.contextPath}/vi_ca_nhan/detail?id=${vcn.id}" class="btn-view">Xem</a>
+                            <a href="${pageContext.request.contextPath}/vi_ca_nhan/delete?id=${vcn.id}"
+                               class="btn-delete" onclick="return confirm('Bạn có chắc muốn xóa không?')">Xóa</a>
+                        </div>
+                    </td>
+                </tr>
+            </c:forEach>
+        </table>
+    </div>
 </div>
 
 <div class="sign-out">
