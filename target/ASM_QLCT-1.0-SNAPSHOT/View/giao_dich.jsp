@@ -277,9 +277,10 @@
                     <td>${gd.createById.tenDangNhap}</td>
                     <td>
                         <div class="action-buttons">
-                            <a href="${pageContext.request.contextPath}/giao_dich/detail?id=${gd.id}" class="btn-view">Xem</a>
-                            <a href="${pageContext.request.contextPath}/giao_dich/delete?id=${gd.id}"
-                               class="btn-delete" onclick="return confirm('Bạn có chắc muốn xóa không?')">Xóa</a>
+                            <a href="${pageContext.request.contextPath}/giao_dich/detail?id=${gd.id}" class="btn-view"
+                               onclick="return checkUpdate(${gd.createById.id}, '${currentUser.phanQuyen}', ${currentUser.id})">Xem</a>
+                            <a href="${pageContext.request.contextPath}/giao_dich/delete?id=${gd.id}" class="btn-delete"
+                               onclick="return checkDelete(${mt.createById.id}, '${currentUser.phanQuyen}', ${currentUser.id})">Xóa</a>
                         </div>
                     </td>
                 </tr>
