@@ -242,7 +242,7 @@
         <div class="header-actions">
             <form method="get" action="${pageContext.request.contextPath}/muc_tieu/search">
                 <div class="input-group">
-                    <input type="text" name="ten" class="form-control" aria-label="Recipient’s username" aria-describedby="button-addon2" required>
+                    <input type="text" name="ten" class="form-control" aria-label="Recipient’s username" aria-describedby="button-addon2" oninput="this.value = this.value.replace(/[^a-zA-Z0-9À-ỹ\s]/g,'')" required>
                     <button class="btn btn-outline-secondary" type="button" id="button-addon2">Tìm kiếm</button>
                 </div>
             </form>

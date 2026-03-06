@@ -50,6 +50,11 @@ public class GiaoDichDetailServlet extends HttpServlet {
             return;
         }
 
+        if (!moTa.matches("^[a-zA-Z0-9À-ỹ\\s]+$")) {
+            resp.getWriter().println("<script>alert('Mo ta khong hop le');history.back();</script>");
+            return;
+        }
+
         GiaoDichVaTongQuan gd = repo.Detail(id_update); //tại sao lại cần cả cái này
 
         if (gd != null && (

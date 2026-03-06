@@ -17,6 +17,10 @@ public class GiaoDichSearchServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String mota = req.getParameter("mota");
+        if (!mota.matches("^[a-zA-Z0-9À-ỹ\\s]+$")) {
+            resp.getWriter().println("<script>alert('Mo ta khong hop le');history.back();</script>");
+            return;
+        }
         req.setAttribute("giaodichs", repo.timkiem(mota));
         req.getRequestDispatcher("/View/giao_dich.jsp").forward(req, resp);
     }

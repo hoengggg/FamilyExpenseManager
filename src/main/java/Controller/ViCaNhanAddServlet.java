@@ -35,6 +35,11 @@ public class ViCaNhanAddServlet extends HttpServlet {
         Double sotien = Double.parseDouble(req.getParameter("soTien"));
         DangNhap currentUser = (DangNhap) req.getSession().getAttribute("currentUser");
 
+        if (!mota.matches("^[a-zA-Z0-9À-ỹ\\s]+$")) {
+            resp.getWriter().println("<script>alert('Mo ta khong hop le');history.back();</script>");
+            return;
+        }
+
         ViCaNhan viCaNhan = new ViCaNhan(null, ngayThang, loai, danhmuc, mota, sotien, currentUser);
         repo.them(viCaNhan);
         resp.sendRedirect(req.getContextPath() + "/vi_ca_nhan");

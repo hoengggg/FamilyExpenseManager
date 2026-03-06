@@ -16,6 +16,12 @@ public class ViCaNhanSearchServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String mota = req.getParameter("mota");
+
+        if (!mota.matches("^[a-zA-Z0-9À-ỹ\\s]+$")) {
+            resp.getWriter().println("<script>alert('Mo ta khong hop le');history.back();</script>");
+            return;
+        }
+
         req.setAttribute("listViCaNhan", repo.timkiem(mota));
         req.getRequestDispatcher("/View/vi_ca_nhan.jsp").forward(req, resp);
     }

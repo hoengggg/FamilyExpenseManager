@@ -70,7 +70,7 @@
         </select>
 
         <label>Số tiền</label>
-        <input type="number" name="soTien" class="form-input" min="0" required/>
+        <input type="number" name="soTien" class="form-input" min="0" oninput="this.value = this.value.replace(/[^a-zA-Z0-9À-ỹ\s]/g,'')" required/>
 
         <label>Danh mục</label>
         <select name="danhMuc" class="form-select">
@@ -90,7 +90,7 @@
         </select>
 
         <label>Mô tả</label>
-        <input type="text" name="moTa" class="form-input" required/>
+        <input type="text" name="moTa" class="form-input" oninput="this.value = this.value.replace(/[^a-zA-Z0-9À-ỹ\s]/g,'')" required/>
 
         <label>Thời gian</label>
         <input type="date" name="ngayThang" class="form-input" required/>

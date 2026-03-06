@@ -46,6 +46,11 @@ public class ViCaNhanDetailServlet extends HttpServlet {
         Long createdById = currentUser.getId();
         Long id = Long.parseLong(req.getParameter("id"));
 
+        if (!mota.matches("^[a-zA-Z0-9À-ỹ\\s]+$")) {
+            resp.getWriter().println("<script>alert('Mo ta khong hop le');history.back();</script>");
+            return;
+        }
+
         ViCaNhan existing = repo.Detail(id, currentUser);
         if (existing == null) {
             resp.getWriter().println("<script>alert('Không có quyền sửa'); window.history.back();</script>");

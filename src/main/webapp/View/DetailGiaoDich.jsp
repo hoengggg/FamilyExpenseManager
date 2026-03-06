@@ -93,7 +93,7 @@
         </select>
 
         <label>Mô tả</label>
-        <input type="text" name="moTa" class="form-input" value="${giaoDichXem.moTa}" required/>
+        <input type="text" name="moTa" class="form-input" value="${giaoDichXem.moTa}" oninput="this.value = this.value.replace(/[^a-zA-Z0-9À-ỹ\s]/g,'')" required/>
 
         <label>Thời gian</label>
         <input type="date" name="ngayThang" class="form-input" value="${giaoDichXem.ngayThang}" required/>

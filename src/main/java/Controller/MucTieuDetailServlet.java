@@ -55,6 +55,11 @@ public class MucTieuDetailServlet extends HttpServlet {
                     resp.getWriter().println("<script>alert('Khong duoc dat thoi gian trong qua khu'); window.history.back();</script>");
                     return;
                 }
+
+                if (!ten.matches("^[a-zA-Z0-9À-ỹ\\s]+$")) {
+                    resp.getWriter().println("<script>alert('Ten khong hop le');history.back();</script>");
+                    return;
+                }
             }
         }
 

@@ -63,7 +63,7 @@
 </div>
 <form method="post" action="${pageContext.request.contextPath}/muc_tieu/add" class="transaction-form">
     <label>Tên mục tiêu</label>
-    <input type="text" name="ten" class="form-input" required/>
+    <input type="text" name="ten" class="form-input" oninput="this.value = this.value.replace(/[^a-zA-Z0-9À-ỹ\s]/g,'')" required/>
 
     <label>Tiền mục tiêu</label>
     <input type="number" name="tienMucTieu" class="form-input" min="0" required/>

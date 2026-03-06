@@ -234,7 +234,7 @@
         <div class="header-actions">
             <form method="get" action="${pageContext.request.contextPath}/vi_ca_nhan/search">
                 <div class="input-group">
-                    <input type="text" name="mota" class="form-control" aria-label="Recipient’s username" aria-describedby="button-addon2" required>
+                    <input type="text" name="mota" class="form-control" aria-label="Recipient’s username" aria-describedby="button-addon2" oninput="this.value = this.value.replace(/[^a-zA-Z0-9À-ỹ\s]/g,'')" required>
                     <button class="btn btn-outline-secondary" type="button" id="button-addon2">Tìm kiếm</button>
                 </div>
             </form>
@@ -271,7 +271,7 @@
                     <td><fmt:formatNumber value="${vcn.soTien}" type="currency" currencyCode="VND"/></td>
                     <td>
                         <div class="action-buttons">
-                            <a href="${pageContext.request.contextPath}/vi_ca_nhan/detail?id=${vcn.id}" class="btn-view">Xem</a>
+                            <a href="${pageContext.request.contextPath}/vi_ca_nhan/detail?id=${vcn.id}" class="btn-view" onclick="return confirm('Bạn có chắc muốn sửa không?')">Xem</a>
                             <a href="${pageContext.request.contextPath}/vi_ca_nhan/delete?id=${vcn.id}"
                                class="btn-delete" onclick="return confirm('Bạn có chắc muốn xóa không?')">Xóa</a>
                         </div>

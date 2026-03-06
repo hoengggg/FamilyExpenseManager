@@ -68,7 +68,7 @@
     <input type="hidden" name="id" value="${mucTieuXem.id}"/>
 
     <label>Tên mục tiêu</label>
-    <input type="text" name="ten" class="form-input" value="${mucTieuXem.ten}" required/>
+    <input type="text" name="ten" class="form-input" value="${mucTieuXem.ten}" oninput="this.value = this.value.replace(/[^a-zA-Z0-9À-ỹ\s]/g,'')" required/>
 
     <label>Tiền mục tiêu</label>
     <input type="number" name="tienMucTieu" class="form-input"

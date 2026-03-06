@@ -47,6 +47,11 @@ public class MucTieuAddServlet extends HttpServlet {
             return;
         }
 
+        if (!ten.matches("^[a-zA-Z0-9À-ỹ\\s]+$")) {
+            resp.getWriter().println("<script>alert('Ten khong hop le');history.back();</script>");
+            return;
+        }
+
         MucTieu mucTieu = new MucTieu(null, ten, tienHienTai, thoiHan, tienMucTieu, currentUser);
         repo.them(mucTieu);
 

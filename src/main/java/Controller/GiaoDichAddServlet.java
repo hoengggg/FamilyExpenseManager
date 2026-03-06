@@ -44,6 +44,11 @@ public class GiaoDichAddServlet extends HttpServlet {
 
         DangNhap currentUser = (DangNhap) req.getSession().getAttribute("currentUser");
 
+        if (!moTa.matches("^[a-zA-Z0-9À-ỹ\\s]+$")) {
+            resp.getWriter().println("<script>alert('Mo ta khong hop le');history.back();</script>");
+            return;
+        }
+
         GiaoDichVaTongQuan giaoDichVaTongQuan = new GiaoDichVaTongQuan(null, ngayThang, loai, danhMuc, moTa, soTien, currentUser);
         repo.them(giaoDichVaTongQuan);
 
