@@ -74,6 +74,28 @@ ASM_QLCT
 - Dễ bảo trì và mở rộng hệ thống
 - Code rõ ràng và có cấu trúc
 
+## 📷 Giao diện hệ thống
+
+### Trang tổng quan
+<p align="center">
+  <img src="src/main/java/images/tongquan.jpg" width="800">
+</p>
+
+### Trang giao dịch
+<p align="center">
+  <img src="src/main/java/images/giaodich.jpg" width="800">
+</p>
+
+### Trang ví cá nhân
+<p align="center">
+  <img src="src/main/java/images/vicanhan.jpg" width="800">
+</p>
+
+### Trang thống kê
+<p align="center">
+  <img src="src/main/java/images/thongke.jpg" width="800">
+</p>
+
 ## ⚙️ Demo dự án
 Truy cập link sau để chạy dự án: https://interlocular-ji-sorely.ngrok-free.dev/ASM_QLCT/dang_nhap
 
