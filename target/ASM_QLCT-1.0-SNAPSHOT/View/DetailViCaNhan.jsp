@@ -66,8 +66,8 @@
         <input type="text" name="id" value="${VCN_Tim.id}" hidden>
         <label>Loại</label>
         <select name="loai" class="form-select" required>
-            <option value="Thu vào" ${VCN_Tim.loai == "Thu vào" ? "checked" : ""}>Thu vào</option>
-            <option value="Chi ra" ${VCN_Tim.loai == "Chi ra" ? "checked" : ""}>Chi ra</option>
+            <option value="Thu vào" ${VCN_Tim.loai == "Thu vào" ? "selected" : ""}>Thu vào</option>
+            <option value="Chi ra" ${VCN_Tim.loai == "Chi ra" ? "selected" : ""}>Chi ra</option>
         </select>
 
         <label>Số tiền</label>
