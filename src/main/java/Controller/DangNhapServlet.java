@@ -38,7 +38,7 @@ public class DangNhapServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String tenDangNhap = req.getParameter("username");  //cái trong nội dung trong dấu "" của dòng này thì nội dung của nó là lấy từ ô name trong input chứ ko phải entity, hiểu đơn giản cái req.getParameter này thì nội dung trong "" ko phải là gọi từ entity ra mà là gọi từ nội dung trong thẻ name trong ô input bên jsp
         // <input type="text" name="  username"     required>
-        String matKhau = req.getParameter("password");
+        String matKhau = req.getParameter("password");   //nhận username và password từ form đăng nhập sau đó gọi repo để thực hiện chức năng đăng nhập
 
         DangNhap user = repository.login(tenDangNhap, matKhau);
 

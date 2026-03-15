@@ -85,7 +85,7 @@ public class GiaoDichAddServlet extends HttpServlet {
     public void init() throws ServletException {
         super.init();
         String username = "hoanglhth05020@gmail.com";
-        String appPassword = "kzlcbgrympjjvzog"; // App Password thật
+        String appPassword = "123";
         GmailSender.init(username, appPassword, true);
     }
 }

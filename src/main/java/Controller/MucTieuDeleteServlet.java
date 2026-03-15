@@ -27,7 +27,6 @@ public class MucTieuDeleteServlet extends HttpServlet {
 
         MucTieu mt = repo.Detail(id);
 
-        // ✅ Bổ sung kiểm tra quyền
         if (mt != null && (
                 "Parents".equals(currentUser.getPhanQuyen())
                         || mt.getCreateById().getId().equals(currentUser.getId())

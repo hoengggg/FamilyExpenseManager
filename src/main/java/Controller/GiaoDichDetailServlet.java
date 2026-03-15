@@ -55,7 +55,7 @@ public class GiaoDichDetailServlet extends HttpServlet {
             return;
         }
 
-        GiaoDichVaTongQuan gd = repo.Detail(id_update); //tại sao lại cần cả cái này
+        GiaoDichVaTongQuan gd = repo.Detail(id_update);
 
         if (gd != null && (
                 "Parents".equals(currentUser.getPhanQuyen())

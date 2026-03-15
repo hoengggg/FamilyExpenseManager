@@ -13,7 +13,6 @@ import java.util.List;
 
 
 public class GiaoDichVaTongQuanRepository {
-    //sau này chắc thay cái repository này thành các code để kết nối vs sql còn lại mấy cái entity, controller và view thì vẫn vậy nhỉ
     public List<GiaoDichVaTongQuan> getAll(){
         try (Session session = HibernateConfig.getFACTORY().openSession()) {
             return session

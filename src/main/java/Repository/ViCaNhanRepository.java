@@ -96,7 +96,7 @@ public class ViCaNhanRepository {
         }
     }
 
-    //createById là khoá ngoại đăng nhập với ví cá nhân và giao dịch và nó kết nối vs id ở bảng này và bảng giao dịch
+
     public List<ViCaNhan> loctheoloai(String loai, Long userId){
         Session session = HibernateConfig.getFACTORY().openSession();
         //bước này là để tạo câu query

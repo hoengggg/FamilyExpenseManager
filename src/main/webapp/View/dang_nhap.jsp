@@ -14,7 +14,6 @@
   </head>
 
   <style>
-      /* Đảm bảo body và html chiếm hết màn hình */
       html,
       body {
           margin: 0;
@@ -22,10 +21,8 @@
           width: 100%;
           height: 100%;
           overflow: hidden;
-          /* Loại bỏ cuộn dọc nếu có */
       }
 
-      /* Ảnh nền full màn hình */
       .background-image {
           position: absolute;
           top: 0;
@@ -33,21 +30,16 @@
           width: 100%;
           height: 100%;
           object-fit: cover;
-          /* Đảm bảo ảnh phủ toàn bộ màn hình mà không bị kéo dãn */
           z-index: -1;
-          /* Đặt ảnh nền dưới các phần tử khác */
       }
 
-      /* Form đăng nhập */
       .form-container {
           width: 90%;
           max-width: 400px;
           padding: 20px;
           border-radius: 10px;
           background: rgba(255, 255, 255, 0.2);
-          /* Làm nền mờ nhạt */
           backdrop-filter: blur(5px);
-          /* Làm mờ nền phía sau */
           box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
           margin: 0 auto;
           position: absolute;
@@ -56,7 +48,6 @@
           transform: translate(-50%, -50%);
           z-index: 1;
           border: 3px solid rgba(255, 255, 255, 0.3);
-          /* Viền nhẹ giúp nổi bật */
           justify-content: space-around;
       }
 
@@ -75,7 +66,6 @@
           border-radius: 5px;
       }
 
-      /* Nút đăng nhập */
       .form-container button {
           width: 98.6%;
           padding: 10px;
@@ -110,7 +100,6 @@
           margin: 0;
           padding: 10px;
           mix-blend-mode: multiply;
-          /* Biến nền trắng thành trong suốt */
       }
 
       .tieude{
@@ -123,8 +112,6 @@
           padding: 0;
           width: 100%;
           height: 100%;
-          /*overflow: hidden;*/
-          /* Gradient nhiều màu */
           background: linear-gradient(45deg, #2196F3, #77ffff, aquamarine, cyan);
       }
 

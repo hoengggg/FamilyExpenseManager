@@ -37,7 +37,7 @@ public class ThucHienMucTieuServlet extends HttpServlet {
         }
 
 
-        Long id = Long.parseLong(req.getParameter("id")); //lấy trong cái mapping ở cái nút bên jsp
+        Long id = Long.parseLong(req.getParameter("id")); //lấy trong cái mapping ở cái nút thực hiện bên jsp
 
         //tìm mục tiêu trong db theo id
         MucTieu mt = repo.Detail(id.intValue());

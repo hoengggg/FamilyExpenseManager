@@ -7,7 +7,6 @@
     <title>Thống kê</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        /* Toàn bộ CSS giữ nguyên từ muc_tieu.jsp */
         body {
             background-color: gainsboro;
             font-family: Arial;
@@ -20,10 +19,10 @@
         .menu-bar {
             margin-top: 30px;
             display: flex;
-            gap: 90px; /* KHOẢNG CÁCH GIỮA CÁC NÚT */
-            background: #ecebed; /* NỀN XÁM NHẠT */
+            gap: 90px;
+            background: #ecebed;
             padding: 1px 1px;
-            border-radius: 80px; /* VIỀN BO TRÒN */
+            border-radius: 80px;
             margin: 30px auto 0 auto;
             max-width: 1200px;
             width: 95%;
@@ -34,8 +33,8 @@
 
         .button-menu a {
             display: flex;
-            justify-content: center;  /* căn giữa ngang */
-            align-items: center;      /* căn giữa dọc */
+            justify-content: center;
+            align-items: center;
             text-decoration: none;
         }
 
@@ -64,7 +63,7 @@
         .menu-tongquan.active {
             background: white;
             font-weight: bold;
-            box-shadow: 0 2px 6px #0001; /* HIỆU ỨNG NỔI BẬT CHO NÚT ACTIVE */
+            box-shadow: 0 2px 6px #0001;
             width: 145px;
         }
 

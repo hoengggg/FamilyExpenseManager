@@ -64,7 +64,6 @@
 </div>
 
 <form method="post" action="${pageContext.request.contextPath}/muc_tieu/update" class="transaction-form">
-    <!-- Bỏ input hidden id -->
     <input type="hidden" name="id" value="${mucTieuXem.id}"/>
 
     <label>Tên mục tiêu</label>
